@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layoutDirection="ltr">
+
+    <TextView
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_editPost"
+        android:layout_margin="@dimen/_8sdp"/>
+    <Button
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete"
+        android:text="d"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_1sdp"
+        />
+    <Button
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="wrap_content"
+        android:id="@+id/update"
+        android:text="u"
+        android:layout_marginTop="@dimen/_8sdp"
+        />
+
+
+</LinearLayout>
