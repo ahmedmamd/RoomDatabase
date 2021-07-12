@@ -52,21 +52,20 @@ class PostsAdapter(
          val database: DatabaseClint = DatabaseClint.getPosts(context)
          holder.update?.setOnClickListener(View.OnClickListener {
 
-//             itemChoosen.itemChoose(position)
+             itemChoosen.itemChoose(position)
 
-             database.userDao()?.updatePost(posts.set(position,Posts("first post")))?.
-             subscribeOn(Schedulers.io())?.
-             observeOn(AndroidSchedulers.mainThread())?.
-             subscribe(object : CompletableObserver {
-                         override fun onSubscribe(d: Disposable?) {
-                         }
-                         override fun onComplete() {
-                           Log.e("updatePost", "onComplete: successfully")
-                         }
-                         override fun onError(e: Throwable?) {
-                         }
-                     })
-
+//             database.userDao()?.updatePost(posts?.set(position,Posts("first post")))?.
+//             subscribeOn(Schedulers.io())?.
+//             observeOn(AndroidSchedulers.mainThread())?.
+//             subscribe(object : CompletableObserver {
+//                         override fun onSubscribe(d: Disposable?) {
+//                         }
+//                         override fun onComplete() {
+//                           Log.e("updatePost", "onComplete: successfully  "+posts.get(position)?.posts)
+//                         }
+//                         override fun onError(e: Throwable?) {
+//                         }
+//                     })
          })
          holder.delete.setOnClickListener(View.OnClickListener {
 

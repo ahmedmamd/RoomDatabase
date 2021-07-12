@@ -99,7 +99,7 @@ class DataActivity : AppCompatActivity(),PostsAdapter.Itemclicked {
 //        mutablePosts.add(position, Posts(binding.geteditpost.text.toString()))
 //        getposts()
 //        adapter.notifyDataSetChanged()
-        database?.userDao()?.updatePost(Posts())?.
+        database?.userDao()?.updatePost(Posts("first post"))?.
         subscribeOn(Schedulers.io())?.
         observeOn(AndroidSchedulers.mainThread())?.
         subscribe(object : CompletableObserver {
@@ -107,7 +107,10 @@ class DataActivity : AppCompatActivity(),PostsAdapter.Itemclicked {
 
             }
             override fun onComplete() {
-                Log.e("updatePost", "onComplete: successfully")
+                mutablePosts.clear()
+                getposts()
+              //  adapter.notifyDataSetChanged()
+             //   Log.e("updatePost", "onComplete: successfully  "+mutablePosts.get(position)?.posts)
             }
 
             override fun onError(e: Throwable?) {
