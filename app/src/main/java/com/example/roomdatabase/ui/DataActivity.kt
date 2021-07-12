@@ -71,8 +71,8 @@ class DataActivity : AppCompatActivity(),PostsAdapter.Itemclicked {
                                 mutablePosts.clear()
                                 getposts()
                                // getPostMutableLiveData.postValue(Posts(binding.post.text.toString()))
-                                Log.e("addPost", "post added successfully "+Posts(binding.post.text.toString()))
-                                Toast.makeText(this@DataActivity, "register done", Toast.LENGTH_SHORT).show()
+                                  Log.e("addPost", "post added successfully "+Posts(binding.post.text.toString()))
+                                  Toast.makeText(this@DataActivity, "post added", Toast.LENGTH_SHORT).show()
                             }
                             override fun onError(e: Throwable?) {
                             }
@@ -93,30 +93,59 @@ class DataActivity : AppCompatActivity(),PostsAdapter.Itemclicked {
                     }
                 })
     }
-
     override fun itemChoose(position: Int) {
 //        mutablePosts.clear()
 //        mutablePosts.add(position, Posts(binding.geteditpost.text.toString()))
 //        getposts()
 //        adapter.notifyDataSetChanged()
-        database?.userDao()?.updatePost(Posts("first post"))?.
-        subscribeOn(Schedulers.io())?.
-        observeOn(AndroidSchedulers.mainThread())?.
-        subscribe(object : CompletableObserver {
-            override fun onSubscribe(d: Disposable?) {
+//              mutablePosts.set(position,Posts("first post"))?.let {
+//              database?.userDao()?.updatePost(it)?.
+//            subscribeOn(Schedulers.io())?.
+//            observeOn(AndroidSchedulers.mainThread())?.
+//            subscribe(object : CompletableObserver {
+//            override fun onSubscribe(d: Disposable?) {
+//            }
+//            override fun onComplete() {
+//                  mutablePosts.clear()
+//                  getposts()
+//                  adapter.notifyDataSetChanged()
+//                  Log.e("updatePost", "onComplete: successfully  "+ position)
+//            }
+//            override fun onError(e: Throwable?) {
+//            }
+//        })
 
-            }
-            override fun onComplete() {
-                mutablePosts.clear()
-                getposts()
-              //  adapter.notifyDataSetChanged()
-             //   Log.e("updatePost", "onComplete: successfully  "+mutablePosts.get(position)?.posts)
-            }
+        database?.userDao()?.deletePost(mutablePosts[position])
+                ?.subscribeOn(Schedulers.io())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(object : CompletableObserver {
+                    override fun onSubscribe(d: Disposable?) {
+                    }
 
-            override fun onError(e: Throwable?) {
-            }
-        })
+                    override fun onComplete() {
+                        Log.e("delete", "onComplete: deleted ")
+                    }
 
+                    override fun onError(e: Throwable?) {
+                        Log.e("delete", "onError: "+e?.message )
+                    }
+                })
+        database?.userDao()?.insertpost(Posts(binding.geteditpost.text.toString()))!!
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : CompletableObserver {
+                    override fun onSubscribe(d: Disposable?) {
+                    }
+                    override fun onComplete() {
+                        mutablePosts.clear()
+                        getposts()
+                        // getPostMutableLiveData.postValue(Posts(binding.post.text.toString()))
+                        Log.e("addPost", "post added successfully "+Posts(binding.post.text.toString()))
+                        Toast.makeText(this@DataActivity, "post added", Toast.LENGTH_SHORT).show()
+                    }
+                    override fun onError(e: Throwable?) {
+                    }
+                })
 
+        }
     }
-}

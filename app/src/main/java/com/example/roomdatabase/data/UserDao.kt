@@ -24,7 +24,7 @@ interface UserDao {
     @Delete
     fun deletePost(post: Posts?): Completable?
 
-    @Update
-    fun updatePost(post: Posts?): Completable?
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updatePost(post: Posts): Completable?
 
 }
